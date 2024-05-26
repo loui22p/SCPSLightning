@@ -76,6 +76,7 @@ public class Database {
         int dayId = getCurrentDayId();
         // querry database for amount of lightning on a specific day
         try {
+            Lightning.getAllForDay();
             PreparedStatement querryStatement = connection.prepareStatement("SELECT * FROM lightningdb.lightning WHERE day_id = ? AND type_id = ?");
             querryStatement.setInt(1, dayId);
             querryStatement.setInt(2, typeId);
