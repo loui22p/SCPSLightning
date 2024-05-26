@@ -1,25 +1,29 @@
 package org.example;
 
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+
+import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
-public class LightningController {
+public class LightningController extends BaseController {
 
-    public void numberOfLightningsDay(){
-        // querry database for amount of lightning on a specific day
-        try {
-            querryResultSet = Lightning.getAllForDay();
+    LightningDao lightningDao;
 
-            if (querryResultSet.next()) {
-                return querryResultSet.getInt("total_lightnings");
-            } else {
-                return 0;
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public LightningController(LightningDao lightningDao) {
+        this.lightningDao = lightningDao;
+    }
+
+    public void handleCount(HttpExchange exchange) throws IOException {
+        ArrayList<Lightning> lightning = lightningDao.getAllLightnings();
+        String count = String.valueOf(lightning.size());
+        sendResponse(exchange, 200, count);
     }
 
 }

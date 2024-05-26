@@ -26,6 +26,9 @@ public class Main {
         //System.out.println("Now: " + LocalDate.now());
         //db.numberOfLightningsWeek(LocalDate.now());
 
+        DatabaseHandler db = new DatabaseHandler();
+        LightningDao lightningDao = new LightningDao(db);
+
         //Setting up server to host backend
         // Create HTTP server listening on port 8000
         HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
@@ -37,6 +40,8 @@ public class Main {
         server.createContext("/api/cloudToCloud", new SimpleHttpServer.CloudToCloudHandler());
         server.createContext("/api/cloudToGround", new SimpleHttpServer.CloudToGroundHandler());
         server.createContext("/api/fullWeek", new SimpleHttpServer.FullWeekHandeler());
+
+        server.createContext("api/lightnings", new LightningController(lightningDao));
 
         server.setExecutor(null); // Use the default executor
 
