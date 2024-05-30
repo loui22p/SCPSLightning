@@ -20,6 +20,7 @@ public class LightningController extends BaseController {
         this.lightningDao = lightningDao;
     }
 
+    @Override
     public void handleCount(HttpExchange exchange) throws IOException {
         ArrayList<Lightning> lightning = lightningDao.getAllLightnings();
         String count = String.valueOf(lightning.size());

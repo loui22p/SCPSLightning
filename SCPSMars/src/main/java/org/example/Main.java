@@ -27,6 +27,7 @@ public class Main {
         //db.numberOfLightningsWeek(LocalDate.now());
 
         DatabaseHandler db = new DatabaseHandler();
+        db.setup();
         LightningDao lightningDao = new LightningDao(db);
 
         //Setting up server to host backend
@@ -41,7 +42,7 @@ public class Main {
         server.createContext("/api/cloudToGround", new SimpleHttpServer.CloudToGroundHandler());
         server.createContext("/api/fullWeek", new SimpleHttpServer.FullWeekHandeler());
 
-        server.createContext("api/lightnings", new LightningController(lightningDao));
+        server.createContext("/api/lightnings", new LightningController(lightningDao));
 
         server.setExecutor(null); // Use the default executor
 

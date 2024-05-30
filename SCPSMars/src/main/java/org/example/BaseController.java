@@ -7,8 +7,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-public class BaseController implements HttpHandler {
+public abstract class BaseController implements HttpHandler {
 
+    //Denne metode bør overrides og kun have funktionalitet i subklasserne
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         // Set response headers
@@ -18,15 +19,19 @@ public class BaseController implements HttpHandler {
         String path = exchange.getRequestURI().getPath();
 
         switch (path) {
-            case "lightning/count":
-                handleCount();
+            case "/api/lightnings/count":
+                handleCount(exchange);
         }
     }
 
-    protected void handleCount() throws IOException {};
+    //Skal kun være i subklasserne
+    public void handleCount(HttpExchange exchange) throws IOException {};
 
     private void setCorsHeaders(HttpExchange exchange) {
-
+        exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "http://localhost:8080");
+        exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+        exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        exchange.getResponseHeaders().add("Access-Control-Allow-Credentials", "true");
     }
 
     protected void sendResponse(HttpExchange exchange, int status, String response) throws IOException {

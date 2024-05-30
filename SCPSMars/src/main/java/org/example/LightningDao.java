@@ -11,12 +11,12 @@ public class LightningDao {
     DatabaseHandler databaseHandler;
 
     public LightningDao(DatabaseHandler databaseHandler) {
-        databaseHandler = databaseHandler;
+        this.databaseHandler = databaseHandler;
     }
 
     public ArrayList<Lightning> getAllLightnings() {
         try {
-            ResultSet querryResultSet = databaseHandler.executeSql("SELECT * FROM lightning");
+            ResultSet querryResultSet = databaseHandler.executeSql("SELECT * FROM lightningdb.lightning");
 
             ArrayList<Lightning> lightnings = new ArrayList<Lightning>();
             while (querryResultSet.next()) {
