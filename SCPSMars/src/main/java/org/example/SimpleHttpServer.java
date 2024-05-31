@@ -108,47 +108,47 @@ public class SimpleHttpServer {
         }
     }
 
-    static class CloudToGroundHandler implements HttpHandler {
-        @Override
-        public void handle(HttpExchange exchange) throws IOException {
-            // Set response headers
-            exchange.getResponseHeaders().set("Content-Type", "text/plain");
-            setCorsHeaders(exchange);
+//    static class CloudToGroundHandler implements HttpHandler {
+//        @Override
+//        public void handle(HttpExchange exchange) throws IOException {
+//            // Set response headers
+//            exchange.getResponseHeaders().set("Content-Type", "text/plain");
+//            setCorsHeaders(exchange);
+//
+//            // Get the number for yesterday
+//            Database db = new Database();
+//            int numberLightningsType1 = db.numberOfLightningsType(1);
+//            int numberLightningsType2 = db.numberOfLightningsType(2);
+//            int numberOfLightningsCloud = numberLightningsType1 + numberLightningsType2;
+//
+//            // Send response
+//            String response = Integer.toString(numberOfLightningsCloud);
+//            exchange.sendResponseHeaders(200, response.getBytes().length);
+//            OutputStream os = exchange.getResponseBody();
+//            os.write(response.getBytes());
+//            os.close();
+//        }
+//    }
 
-            // Get the number for yesterday
-            Database db = new Database();
-            int numberLightningsType1 = db.numberOfLightningsType(1);
-            int numberLightningsType2 = db.numberOfLightningsType(2);
-            int numberOfLightningsCloud = numberLightningsType1 + numberLightningsType2;
-
-            // Send response
-            String response = Integer.toString(numberOfLightningsCloud);
-            exchange.sendResponseHeaders(200, response.getBytes().length);
-            OutputStream os = exchange.getResponseBody();
-            os.write(response.getBytes());
-            os.close();
-        }
-    }
-
-    static class CloudToCloudHandler implements HttpHandler {
-        @Override
-        public void handle(HttpExchange exchange) throws IOException {
-            // Set response headers
-            exchange.getResponseHeaders().set("Content-Type", "text/plain");
-            setCorsHeaders(exchange);
-
-            // Get the number for yesterday
-            Database db = new Database();
-            int numberOfLightningsCloud = db.numberOfLightningsType(3);
-
-            // Send response
-            String response = Integer.toString(numberOfLightningsCloud);
-            exchange.sendResponseHeaders(200, response.getBytes().length);
-            OutputStream os = exchange.getResponseBody();
-            os.write(response.getBytes());
-            os.close();
-        }
-    }
+//    static class CloudToCloudHandler implements HttpHandler {
+//        @Override
+//        public void handle(HttpExchange exchange) throws IOException {
+//            // Set response headers
+//            exchange.getResponseHeaders().set("Content-Type", "text/plain");
+//            setCorsHeaders(exchange);
+//
+//            // Get the number for yesterday
+//            Database db = new Database();
+//            int numberOfLightningsCloud = db.numberOfLightningsType(3);
+//
+//            // Send response
+//            String response = Integer.toString(numberOfLightningsCloud);
+//            exchange.sendResponseHeaders(200, response.getBytes().length);
+//            OutputStream os = exchange.getResponseBody();
+//            os.write(response.getBytes());
+//            os.close();
+//        }
+//    }
 
     static class FullWeekHandeler implements HttpHandler {
         @Override

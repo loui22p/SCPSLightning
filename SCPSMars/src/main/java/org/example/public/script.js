@@ -29,7 +29,7 @@ setInterval( function() {
     fetchFullWeek();
     fetchCloudToGround();
     fetchCloudToCloud();
-}, 600000);
+}, 15000/*600000*/);
 
 function clearLightnings() {
     container.innerHTML = '';
@@ -104,7 +104,7 @@ function fetchFullWeek() {
 }
 
 function fetchCloudToGround() {
-    return fetch(url + '/api/cloudToGround')
+    return fetch(url + '/api/lightnings/cloudToGround')
         .then(response => {
             console.log('Response:', response);
             return response.text();
@@ -113,13 +113,13 @@ function fetchCloudToGround() {
             insertIcons(data, 'cloudToGroundLightningSmall');
         })
         .catch(error => {
-            console.error('Error fetching state:', error);
+            console.error('Error fetching state from URL:', url + '/api/lightnings/cloudToGround', error);
             throw error;
         });
 };
 
 export const fetchCloudToCloud = () => {
-    return fetch(url + '/api/cloudToCloud')
+    return fetch(url + '/api/lightnings/cloudToCloud')
         .then(response => {
             console.log('Response:', response);
             return response.text();
@@ -128,7 +128,7 @@ export const fetchCloudToCloud = () => {
             insertIcons(data, 'cloudToCloudLightningSmall');
         })
         .catch(error => {
-            console.error('Error fetching state:', error);
+            console.error('Error fetching state from URL:', url + '/api/lightnings/cloudToCloud', error);
             throw error;
         });
 };
