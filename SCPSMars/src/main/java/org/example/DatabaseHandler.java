@@ -11,6 +11,7 @@ import java.util.Map;
 public class DatabaseHandler {
     static Connection connection = null;
     static Dotenv dotenv = Dotenv.load();
+    private static DatabaseHandler databaseInstance = null;
 
     public void setup() {
         try {
@@ -28,5 +29,12 @@ public class DatabaseHandler {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static DatabaseHandler getInstance() {
+        if (databaseInstance == null) {
+            databaseInstance = new DatabaseHandler();
+        }
+        return databaseInstance;
     }
 }

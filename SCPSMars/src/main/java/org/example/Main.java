@@ -26,7 +26,7 @@ public class Main {
         //System.out.println("Now: " + LocalDate.now());
         //db.numberOfLightningsWeek(LocalDate.now());
 
-        DatabaseHandler db = new DatabaseHandler();
+        DatabaseHandler db = DatabaseHandler.getInstance();
         db.setup();
         LightningDao lightningDao = new LightningDao(db);
 

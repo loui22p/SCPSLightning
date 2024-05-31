@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class LightningController extends BaseController {
 
-    LightningDao lightningDao;
+    private LightningDao lightningDao;
 
     public LightningController(LightningDao lightningDao) {
         this.lightningDao = lightningDao;
