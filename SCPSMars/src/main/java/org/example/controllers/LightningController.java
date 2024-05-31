@@ -30,9 +30,6 @@ public class LightningController extends BaseController {
         String path = exchange.getRequestURI().getPath();
 
         switch(path) {
-//            case "/api/lightnings/count":
-//                handleCount(exchange);
-//                break;
             case "/api/lightnings/cloudToGround":
                 handleCloudToGround(exchange);
                 break;

@@ -1,6 +1,7 @@
 package org.example;
 
 import com.sun.net.httpserver.HttpServer;
+import org.example.controllers.DayController;
 import org.example.controllers.LightningController;
 import org.example.daos.LightningDao;
 
@@ -21,12 +22,13 @@ public class Main {
 
         // Create a context for "/api/data" endpoint
         server.createContext("/api/tenMinutes", new SimpleHttpServer.tenMinuteHandler());
-        server.createContext("/api/day", new SimpleHttpServer.TodayHandler());
-        server.createContext("/api/week", new SimpleHttpServer.ThisWeekHandler());
-//        server.createContext("/api/cloudToCloud", new SimpleHttpServer.CloudToCloudHandler());
-//        server.createContext("/api/cloudToGround", new SimpleHttpServer.CloudToGroundHandler());
-        server.createContext("/api/fullWeek", new SimpleHttpServer.FullWeekHandeler());
+//        server.createContext("/api/day", new SimpleHttpServer.TodayHandler());
+//        server.createContext("/api/week", new SimpleHttpServer.ThisWeekHandler());
+//        server.createContext("/api/fullWeek", new SimpleHttpServer.FullWeekHandeler());
 
+        server.createContext("/api/day/fullWeek", new DayController());
+        server.createContext("/api/day/week", new DayController());
+        server.createContext("/api/day/day", new DayController());
         server.createContext("/api/lightnings/cloudToGround", new LightningController());
         server.createContext("/api/lightnings/cloudToCloud", new LightningController());
 
