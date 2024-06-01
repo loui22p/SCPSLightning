@@ -27,8 +27,10 @@ public class DayDao {
         int amount = 0;
         // querry database for amount of lightning on a specific day
         try (ResultSet querryResultSet = databaseHandler.executeSqlWithDateParam("SELECT * FROM lightningdb.day WHERE date = ?", date)){
-            while (querryResultSet.next()) {
-                amount++;
+            if (querryResultSet.next()) {
+                amount = querryResultSet.getInt("total_lightnings");
+            } else {
+                amount = 0;
             }
             return amount;
         } catch (SQLException e) {

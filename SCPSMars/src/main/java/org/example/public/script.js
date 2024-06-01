@@ -29,7 +29,7 @@ setInterval( function() {
     fetchFullWeek();
     fetchCloudToGround();
     fetchCloudToCloud();
-}, 15000/*600000*/);
+}, 20000/*600000*/);
 
 function clearLightnings() {
     container.innerHTML = '';
@@ -52,7 +52,7 @@ function fetchTenMinutes() {
 };
 
 function fetchDay() {
-    return fetch(url + '/api/day')
+    return fetch(url + '/api/day/day')
         .then(response => {
             console.log('Response:', response);
             return response.text();
@@ -67,7 +67,7 @@ function fetchDay() {
 };
 
 function fetchWeek() {
-    return fetch(url + '/api/week')
+    return fetch(url + '/api/day/week')
         .then(response => {
             console.log('Response:', response);
             return response.text();
@@ -82,7 +82,7 @@ function fetchWeek() {
     }
 
 function fetchFullWeek() {
-    return fetch(url + '/api/fullWeek')
+    return fetch(url + '/api/day/fullWeek')
         .then(response => response.text())
         .then(data => {
             xValues.length = 0;
