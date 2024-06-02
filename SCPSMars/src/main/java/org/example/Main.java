@@ -3,7 +3,6 @@ package org.example;
 import com.sun.net.httpserver.HttpServer;
 import org.example.controllers.DayController;
 import org.example.controllers.LightningController;
-import org.example.daos.LightningDao;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -21,16 +20,18 @@ public class Main {
         HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
 
         // Create a context for "/api/data" endpoint
-        server.createContext("/api/tenMinutes", new SimpleHttpServer.tenMinuteHandler());
+//        server.createContext("/api/tenMinutes", new SimpleHttpServer.tenMinuteHandler());
 //        server.createContext("/api/day", new SimpleHttpServer.TodayHandler());
 //        server.createContext("/api/week", new SimpleHttpServer.ThisWeekHandler());
 //        server.createContext("/api/fullWeek", new SimpleHttpServer.FullWeekHandeler());
+
 
         server.createContext("/api/day/fullWeek", new DayController());
         server.createContext("/api/day/week", new DayController());
         server.createContext("/api/day/day", new DayController());
         server.createContext("/api/lightnings/cloudToGround", new LightningController());
         server.createContext("/api/lightnings/cloudToCloud", new LightningController());
+        server.createContext("/api/lightnings/tenMinutes", new LightningController());
 
         server.setExecutor(null); // Use the default executor
 

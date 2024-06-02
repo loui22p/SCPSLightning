@@ -1,6 +1,8 @@
 package org.example.controllers;
 
+import com.google.gson.JsonArray;
 import com.sun.net.httpserver.HttpExchange;
+import org.example.ApiConnection;
 import org.example.models.Lightning;
 import org.example.daos.LightningDao;
 
@@ -36,6 +38,9 @@ public class LightningController extends BaseController {
             case "/api/lightnings/cloudToCloud":
                 handleCloudToCloud(exchange);
                 break;
+            case "/api/lightnings/tenMinutes":
+                handleTenMinutes(exchange);
+                break;
         }
     }
 
@@ -54,6 +59,16 @@ public class LightningController extends BaseController {
     private void handleCloudToCloud(HttpExchange exchange) throws IOException {
         int totalCloudToGround = lightning.allCloudToCloudLightningsToday();
         String response = Integer.toString(totalCloudToGround);
+        sendResponse(exchange, 200, response);
+    }
+
+    private void handleTenMinutes(HttpExchange exchange) throws IOException {
+        //Insert new data into db
+        ApiConnection apiConnection = new ApiConnection();
+        JsonArray jsonArray = apiConnection.retrieveData();
+
+        //Use the newly retrieved data right away in view
+        String response = Integer.toString(jsonArray.size());
         sendResponse(exchange, 200, response);
     }
 }

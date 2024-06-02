@@ -52,6 +52,29 @@ public class DatabaseHandler {
         }
     }
 
+    public ResultSet executeSqlWithIntAndDateParam(String sql,int i, Date date) throws SQLException {
+        try {
+            PreparedStatement queryStatement = connection.prepareStatement(sql);
+            queryStatement.setInt(1, i);
+            queryStatement.setDate(2, date);
+            return queryStatement.executeQuery();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ResultSet executeSqlWithTimestampAndTwoIntParam(String sql, Timestamp timestamp, int int1, int int2) throws SQLException {
+        try {
+            PreparedStatement queryStatement = connection.prepareStatement(sql);
+            queryStatement.setTimestamp(1, timestamp);
+            queryStatement.setInt(2, int1);
+            queryStatement.setInt(3, int2);
+            return queryStatement.executeQuery();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static DatabaseHandler getInstance() {
         if (databaseInstance == null) {
             databaseInstance = new DatabaseHandler();

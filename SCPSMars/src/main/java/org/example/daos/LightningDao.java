@@ -6,12 +6,15 @@ import org.example.models.Lightning;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class LightningDao {
 
-    DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
-    DayDao dayDao = new DayDao();
+    private DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
+    private DayDao dayDao = new DayDao();
 
 //    public ArrayList<Lightning> getAllLightnings() {
 //        try {
@@ -38,6 +41,18 @@ public class LightningDao {
                 amount++;
             }
             return amount;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void insertIntoDB(LocalDate date, LocalDateTime localDateTime, int type) {
+        // insert lightning into database
+        int dayId = dayDao.saveDate(date);
+        Timestamp timestamp = Timestamp.valueOf(localDateTime);
+
+        try (ResultSet querryResultSet = databaseHandler.executeSqlWithTimestampAndTwoIntParam("INSERT INTO lightningdb.lightning (timestamp, day_id, type_id) VALUES (?,?,?)", timestamp, dayId, type)){
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

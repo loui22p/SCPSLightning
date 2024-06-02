@@ -36,7 +36,7 @@ function clearLightnings() {
 }
 
 function fetchTenMinutes() {
-    return fetch(url + '/api/tenMinutes')
+    return fetch(url + '/api/lightnings/tenMinutes')
         .then(response => {
             console.log('Response:', response);
             return response.text();
