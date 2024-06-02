@@ -4,11 +4,8 @@ import com.google.gson.JsonArray;
 import com.sun.net.httpserver.HttpExchange;
 import org.example.ApiConnection;
 import org.example.models.Lightning;
-import org.example.daos.LightningDao;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.ArrayList;
 
 public class LightningController extends BaseController {
 
@@ -43,12 +40,6 @@ public class LightningController extends BaseController {
                 break;
         }
     }
-
-//    public void handleCount(HttpExchange exchange) throws IOException {
-//        ArrayList<Lightning> lightning = lightningDao.getAllLightnings();
-//        String count = String.valueOf(lightning.size());
-//        sendResponse(exchange, 200, count);
-//    }
 
     private void handleCloudToGround(HttpExchange exchange) throws IOException {
         int totalCloudToGround = lightning.allCloudToGroundLightningsToday();

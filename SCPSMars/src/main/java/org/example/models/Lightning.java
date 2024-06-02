@@ -1,7 +1,5 @@
 package org.example.models;
 
-import com.google.gson.JsonArray;
-import org.example.ApiConnection;
 import org.example.daos.LightningDao;
 
 public class Lightning {

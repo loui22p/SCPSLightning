@@ -29,7 +29,7 @@ setInterval( function() {
     fetchFullWeek();
     fetchCloudToGround();
     fetchCloudToCloud();
-}, 20000/*600000*/);
+}, 600000);
 
 function clearLightnings() {
     container.innerHTML = '';

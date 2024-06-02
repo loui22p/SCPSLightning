@@ -1,15 +1,9 @@
 package org.example.controllers;
 
 import com.sun.net.httpserver.HttpExchange;
-import org.example.daos.DayDao;
 import org.example.models.Day;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.Map;
 
 public class DayController extends BaseController {

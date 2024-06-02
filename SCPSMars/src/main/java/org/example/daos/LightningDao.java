@@ -1,36 +1,17 @@
 package org.example.daos;
 
 import org.example.DatabaseHandler;
-import org.example.models.Lightning;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 public class LightningDao {
 
     private DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
     private DayDao dayDao = new DayDao();
-
-//    public ArrayList<Lightning> getAllLightnings() {
-//        try {
-//            ResultSet querryResultSet = databaseHandler.executeSql("SELECT * FROM lightningdb.lightning");
-//
-//            ArrayList<Lightning> lightnings = new ArrayList<Lightning>();
-//            while (querryResultSet.next()) {
-//                Lightning lightning = new Lightning();
-//                lightnings.add(lightning);
-//            }
-//
-//            return lightnings;
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 
     public int numberOfLightningsType(int typeId) {
         int dayId = dayDao.getCurrentDayId();
