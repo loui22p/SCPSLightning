@@ -3,7 +3,6 @@ package org.example.daos;
 import org.example.DatabaseHandler;
 
 import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -45,12 +44,20 @@ public class DayDao {
 
             if (!querryResultSet.next()) {
                 // Inserting the new day in the database
-                try (ResultSet newDateInsert = databaseHandler.executeSqlWithIntAndDateParam("INSERT INTO lightningdb.day (total_lightnings, date) VALUES (?, ?)", 1, date)){}
+                try {
+                    databaseHandler.insertSqlWithIntAndDateParam("INSERT INTO lightningdb.day (total_lightnings, date) VALUES (?, ?)", 1, date);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
 
             } else {
                 // Updating the amount of lightnings for the already existing day
                 int lightnings = querryResultSet.getInt("total_lightnings");
-                try(ResultSet existingDateUpdate = databaseHandler.executeSqlWithIntAndDateParam("UPDATE lightningdb.day SET total_lightnings = ? WHERE date=?", lightnings+1, date)){}
+                try {
+                    databaseHandler.updateSqlWithIntAndDateParam("UPDATE lightningdb.day SET total_lightnings = ? WHERE date=?", lightnings+1, date);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
 
             // Returning the id for the given date

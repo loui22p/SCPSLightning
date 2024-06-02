@@ -51,8 +51,8 @@ public class LightningDao {
         int dayId = dayDao.saveDate(date);
         Timestamp timestamp = Timestamp.valueOf(localDateTime);
 
-        try (ResultSet querryResultSet = databaseHandler.executeSqlWithTimestampAndTwoIntParam("INSERT INTO lightningdb.lightning (timestamp, day_id, type_id) VALUES (?,?,?)", timestamp, dayId, type)){
-
+        try {
+            databaseHandler.executeSqlWithTimestampAndTwoIntParam("INSERT INTO lightningdb.lightning (timestamp, day_id, type_id) VALUES (?,?,?)", timestamp, dayId, type);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
