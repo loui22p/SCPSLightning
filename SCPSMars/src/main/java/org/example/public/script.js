@@ -36,7 +36,7 @@ function clearLightnings() {
 }
 
 function fetchTenMinutes() {
-    return fetch(url + '/api/tenMinutes')
+    return fetch(url + '/api/lightnings/tenMinutes')
         .then(response => {
             console.log('Response:', response);
             return response.text();
@@ -52,7 +52,7 @@ function fetchTenMinutes() {
 };
 
 function fetchDay() {
-    return fetch(url + '/api/day')
+    return fetch(url + '/api/day/day')
         .then(response => {
             console.log('Response:', response);
             return response.text();
@@ -67,7 +67,7 @@ function fetchDay() {
 };
 
 function fetchWeek() {
-    return fetch(url + '/api/week')
+    return fetch(url + '/api/day/week')
         .then(response => {
             console.log('Response:', response);
             return response.text();
@@ -82,7 +82,7 @@ function fetchWeek() {
     }
 
 function fetchFullWeek() {
-    return fetch(url + '/api/fullWeek')
+    return fetch(url + '/api/day/fullWeek')
         .then(response => response.text())
         .then(data => {
             xValues.length = 0;
@@ -104,7 +104,7 @@ function fetchFullWeek() {
 }
 
 function fetchCloudToGround() {
-    return fetch(url + '/api/cloudToGround')
+    return fetch(url + '/api/lightnings/cloudToGround')
         .then(response => {
             console.log('Response:', response);
             return response.text();
@@ -113,13 +113,13 @@ function fetchCloudToGround() {
             insertIcons(data, 'cloudToGroundLightningSmall');
         })
         .catch(error => {
-            console.error('Error fetching state:', error);
+            console.error('Error fetching state from URL:', url + '/api/lightnings/cloudToGround', error);
             throw error;
         });
 };
 
 export const fetchCloudToCloud = () => {
-    return fetch(url + '/api/cloudToCloud')
+    return fetch(url + '/api/lightnings/cloudToCloud')
         .then(response => {
             console.log('Response:', response);
             return response.text();
@@ -128,7 +128,7 @@ export const fetchCloudToCloud = () => {
             insertIcons(data, 'cloudToCloudLightningSmall');
         })
         .catch(error => {
-            console.error('Error fetching state:', error);
+            console.error('Error fetching state from URL:', url + '/api/lightnings/cloudToCloud', error);
             throw error;
         });
 };
