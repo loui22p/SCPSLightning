@@ -1,10 +1,16 @@
 package org.example.controllers;
 
 import com.sun.net.httpserver.HttpExchange;
+import org.example.models.Type;
 
 import java.io.IOException;
 
 public class TypeController extends BaseController{
+
+    private Type type;
+    public TypeController() {
+        type = new Type();
+    }
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
