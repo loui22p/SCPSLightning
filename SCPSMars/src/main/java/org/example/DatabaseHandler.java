@@ -4,7 +4,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 import java.sql.*;
 
-public class DatabaseHandler implements AutoCloseable {
+public class DatabaseHandler {
     static Connection connection;
     static Dotenv dotenv = Dotenv.load();
     private static DatabaseHandler databaseInstance;
@@ -87,10 +87,5 @@ public class DatabaseHandler implements AutoCloseable {
             databaseInstance = new DatabaseHandler();
         }
         return databaseInstance;
-    }
-
-    @Override
-    public void close() throws Exception {
-
     }
 }
